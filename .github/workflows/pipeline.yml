@@ -1,4 +1,4 @@
-name: Simple CI
+name: Simple CI-CD
 
 on:
   push:
@@ -20,10 +20,10 @@ jobs:
 
       - name: Build app
         run: dotnet build
-        
-      - name: Run tests   # ADD test HERE
+
+      - name: Run tests
         run: dotnet test
-      
+
       - name: Publish app
         run: dotnet publish -c Release -o ./publish
 
@@ -32,3 +32,18 @@ jobs:
         with:
           name: demo-app
           path: ./publish
+
+  deploy:
+    needs: build   # THIS IS IMPORTANT
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: demo-app
+
+      - name: Run app (simulate deployment)
+        run: |
+          cd publish
+          dotnet DemoApp.dll
