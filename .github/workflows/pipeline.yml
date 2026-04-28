@@ -20,6 +20,9 @@ jobs:
 
       - name: Build app
         run: dotnet build
+        
+      - name: Run tests   # ADD test HERE
+        run: dotnet test
       
       - name: Publish app
         run: dotnet publish -c Release -o ./publish
