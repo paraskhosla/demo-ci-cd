@@ -33,17 +33,18 @@ jobs:
           name: demo-app
           path: ./publish
 
-  deploy:
-    needs: build   # THIS IS IMPORTANT
-    runs-on: ubuntu-latest
+deploy:
+      needs: build
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: demo-app
+      steps:
+        - name: Download artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: demo-app
 
-      - name: Run app (simulate deployment)
-        run: |
-          cd publish
-          dotnet DemoApp.dll
+        - name: Debug files
+          run: ls -R
+
+        - name: Run app
+          run: dotnet DemoApp.dll
