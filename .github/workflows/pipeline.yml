@@ -20,3 +20,11 @@ jobs:
 
       - name: Build app
         run: dotnet build
+              - name: Publish app
+        run: dotnet publish -c Release -o ./publish
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: demo-app
+          path: ./publish
