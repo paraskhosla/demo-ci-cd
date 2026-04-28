@@ -20,7 +20,8 @@ jobs:
 
       - name: Build app
         run: dotnet build
-              - name: Publish app
+      
+      - name: Publish app
         run: dotnet publish -c Release -o ./publish
 
       - name: Upload artifact
